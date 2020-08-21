@@ -1,45 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+  <title>Home Page</title>
 
-  <body>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-success">
-        <a class="navbar-brand" href="/urls">TinyApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/urls">My URLs</a>
-            <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
-          </div>
-        </div>
-        <% if( user ){ %>
-        <form method="POST" action="/logout">
-          <h6> Logged in as <%= user.email %> ! </h6>
-          <button type="submit" class="btn btn-primary">Logout</button>
-        </form>
-        <%} else { %>
-        <!-- <form method="POST" action="/login"> -->
-        <a class="nav-item nav-link" href="/login"><button class="btn btn-primary">Sign In</button></a>
-        <a class="nav-item nav-link" href="/register"><button class="btn btn-primary">Register</button></a>
-        <!-- </form> -->
-        <% } %>
-      </nav>
-    </header>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
 
-    <h1>Hello World!</h1>
-  </body>
+<body>
+  <%- include('partials/_header') %>
+
+  <h1>Hello World!</h1>
+</body>
+
 </html>
