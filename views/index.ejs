@@ -2,30 +2,62 @@
 <html lang="en">
 
 <head>
+  
+ 
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   <title>Home Page</title>
 
-<<<<<<< HEAD
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-=======
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+   <!--CSS STUFF -->
+   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+   <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css"/>
+   <link rel="stylesheet" href="/styles/layout2.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <%- include('partials/_header') %>
+  <!-- Top nav bar (fixed) -->
+  <nav id='nav-bar'>
+    <h1>tweeter</h1>
 
-  <h1>Hello World!</h1>
+    <header id='user_header'>
+      <div class="avatar">
+        <img class='profileImg' src="/images/man.png">
+      </div>
+      <br>
+      <div class="yourname">
+        <h2>NB-famous</h2>
+      </div>
+    </header>
+    <span>
+      <p><strong class="bolded">Write</strong><span class='writeNew'> new tweet</span><button id='scrollUp'
+          type="submit"><a href='#top'>&#x270C;</a></button></p>
+    </span>
+  </nav>
+  <main id="main_container">
+    <div id='head-container'>
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form id="compose" action="/tweets" method="POST">
+          <textarea name="text" id="tweet-text" placeholder='What are you humming about?'></textarea>
+          <div>
+            <button id='tweet_btn' type="submit"><span>Tweet</span></button>
+            <span id="wordCount">140</span>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <button id='back2top' type="button"><a href='#top'><i class="fas fa-arrow-circle-up"></i></a></button>
+
 </body>
 
->>>>>>> c0e6a75c014771240267af8a00078e3ee38d5d12
 </html>
