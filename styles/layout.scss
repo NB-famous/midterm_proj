@@ -1,9 +1,44 @@
 // See: https://sass-lang.com/
 
-body {
-  background-color: #EEE;
+body#main-body{
+  width:100%;
+  height: 100%;
+  background-color: rgba(182, 182, 7, 0.705);
+  
+
 
   h1 {
     color: #244751;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: fixed;
+  height: 300px;
+  width: 100%;
+  background-image: url("/docs/question.png");
+  background-color: royalblue;
+  border: 5px solid black;
+  border-radius: 5px;
+
+
+  div.yourname{
+    height: auto;
+    width: auto;
+    align-self: center;
+    margin-top: 100px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+
+  }
+
+  button#login-btn{
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-right: 35px;
   }
 }
