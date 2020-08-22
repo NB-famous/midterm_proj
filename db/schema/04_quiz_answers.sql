@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS users CASCADE;
+
 CREATE TABLE quiz_answers(
     id SERIAL PRIMARY KEY NOT NULL,
     /*Not sure which data type answer should be*/
