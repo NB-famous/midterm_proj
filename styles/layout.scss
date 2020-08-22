@@ -10,8 +10,8 @@ body#main-body{
       to right,
       rgba(yellow, 0.5),
       rgba(white, 0.5)
-      
-    ), 
+
+    ),
     url("/docs/yellow.png");
   background-attachment: fixed;
   background-position: center bottom;
@@ -48,6 +48,7 @@ header {
     font-family: 'Raleway', sans-serif;
     font-size: 60px;
     font-weight: bold;
+    color: blue;
 
   }
 
@@ -87,7 +88,7 @@ footer {
   padding: 1rem;
   font-family: 'Raleway', sans-serif;
   font-size: 30px;
-  
+
 
 }
 
