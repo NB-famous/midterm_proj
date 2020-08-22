@@ -6,5 +6,5 @@ CREATE TABLE quiz_answers(
     answer TEXT,
     result BIT,
     quiz_question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE
-    
+
 )
