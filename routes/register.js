@@ -17,7 +17,7 @@ module.exports = (db) => {
       .then(res => res.rows[0])
       .catch(err => null);
   });
-  // hope this works //
+  // Why you doing this to me baltej //
   return router;
 };
 
