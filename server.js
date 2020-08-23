@@ -14,6 +14,10 @@ const morgan = require('morgan');
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
+
+// Id from users db
+const { getUserById } = require('./db/database');
+
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
