@@ -1,27 +1,12 @@
-<<<<<<< HEAD
 const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login', { user: req.cookies });
   });
 
-  return router;
-};
 
-
-
-=======
-const express = require('express');
-const router = express.Router();
-
-module.exports = (db) => {
-  router.get('/', (req, res) => {
-    res.render('login', {user: req.cookies});
-  });
-
- 
   router.post('/', (req, res) => {
     const { email, password } = req.body;
     const values = [email, password];
@@ -42,9 +27,8 @@ module.exports = (db) => {
   });
 
 
-  
+
 
   return router;
 };
 
->>>>>>> nikko/features
