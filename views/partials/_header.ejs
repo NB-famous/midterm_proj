@@ -18,10 +18,11 @@
           class="btn btn-secondary btn-lg">Register</button></a>
     </li>
     </ul>
+    
     <% } else { %>
 
     <div class="yourname">
-      Welcome <%= user.username %>
+      Welcome <%= user.username %> !
     </div>
     <ul class="nav nav-pills" id="when-login">
       <li class="home-item">
@@ -34,7 +35,7 @@
         <a href="#"><button type="button" id="createquiz-btn" class="btn btn-primary btn-lg">Create Quiz</button></a>
       </li>
       <li class="logout-item">
-        <a href="/logout"><button type="button" id="logout-btn" class="btn btn-secondary btn-lg">Logout</button></a>
+        <form method="POST" action="/logout"><button type="submit" id="logout-btn" class="btn btn-secondary btn-lg">Logout</button></form>
       </li>
     </ul>
     <% } %>

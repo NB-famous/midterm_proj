@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
-    res.render('register');
+    res.render('register', {user: req.cookies});
   });
 
   router.post('/', (req, res) => {
@@ -18,6 +18,8 @@ module.exports = (db) => {
     db.query(queryStr)
     .then(result => {
       //res.json(result.rows)
+      const user = result.rows;
+      res.cookie('userID', user[0].id);
       res.redirect('/')
     })
     .catch(err => {

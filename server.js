@@ -7,6 +7,7 @@ const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cookieSession = require('cookie-session')
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
@@ -28,8 +29,16 @@ db.connect();
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+//cookie session
+app.use(cookieSession({
+  name: 'session',
+  keys: ["I am not doing so well"],
+}));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -43,7 +52,9 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
 const registerRoutes = require('./routes/register');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -51,6 +62,8 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use('/login', loginRoutes(db));
 app.use('/register', registerRoutes(db));
+app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
+
 // Note: mount other resources here, using the same pattern above
 
 
@@ -62,9 +75,11 @@ app.use('/register', registerRoutes(db));
 }); */
 
 app.get("/", (req, res) => {
+  //res.render('index', {user: req.cookies})
   const userId = loginUserId(req);
   if ( !userId ) {
-    res.render('index');
+    //res.redirect('index');
+    res.render('index', {user: req.cookies})
   }
   else {
     getUserById(db, userId).then(user => {
