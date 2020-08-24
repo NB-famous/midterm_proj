@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
@@ -17,6 +18,7 @@ const db = new Pool(dbParams);
 
 // Id from users db
 const { getUserById } = require('./db/database');
+const { loginUserId } = require('./get_cookie');
 
 db.connect();
 
@@ -27,6 +29,7 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -54,8 +57,25 @@ app.use('/register', registerRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
+/* app.get("/", (req, res) => {
   res.render("index");
+}); */
+
+app.get("/", (req, res) => {
+  const userId = loginUserId(req);
+  if ( !userId ) {
+    res.render('index');
+  }
+  else {
+    getUserById(db, userId).then(user => {
+      if ( !user) {
+        res.redirect('login');
+      }
+      else {
+        res.render('index', {user});
+      }
+    });
+  }
 });
 
 app.listen(PORT, () => {
