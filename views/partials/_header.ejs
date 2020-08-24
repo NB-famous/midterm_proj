@@ -2,12 +2,11 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <header id='user_header'>
+  <% if (!user.username) { %>
   <div class="yourname">
     Welcome To QuizMe
   </div>
-
-  <ul class="nav nav-pills">
-    <% if (!user.username) { %>
+  <ul class="nav nav-pills" id="when-logout">
     <li class="home-item">
       <a href="/"><button type="button" id="home-btn" class="btn btn-primary btn-lg"><i class="fas fa-home"></i></button></a>
     </li>
@@ -18,11 +17,26 @@
       <a class="register-btn" href="/register"><button type="button"
           class="btn btn-secondary btn-lg">Register</button></a>
     </li>
+    </ul>
     <% } else { %>
+
+    <div class="yourname">
+      Welcome <%= user.username %>
+    </div>
+    <ul class="nav nav-pills" id="when-login">
       <li class="home-item">
         <a href="/"><button type="button" id="home-btn" class="btn btn-primary btn-lg"><i class="fas fa-home"></i></button></a>
       </li>
+      <li class="my-quiz">
+        <a href="#"><button type="button" id="myquiz-btn" class="btn btn-primary btn-lg">My Quizzes</button></a>
+      </li>
+      <li class="create-quiz">
+        <a href="#"><button type="button" id="createquiz-btn" class="btn btn-primary btn-lg">Create Quiz</button></a>
+      </li>
+      <li class="logout-item">
+        <a href="/logout"><button type="button" id="logout-btn" class="btn btn-secondary btn-lg">Logout</button></a>
+      </li>
+    </ul>
     <% } %>
-  </ul>
 
 </header>
