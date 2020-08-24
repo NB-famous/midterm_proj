@@ -1,5 +1,5 @@
-function getLoggedUserId(req) {
+function loginUserId(req) {
   return req.cookies.userID;
 };
 
-module.exports = {getLoggedUserId};
+module.exports = {loginUserId};
