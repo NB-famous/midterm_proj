@@ -57,18 +57,6 @@ const registerRoutes = require('./routes/register');
 const createQuizRoutes = require('./routes/createQuiz');
 
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use('/login', loginRoutes(db));
-app.use('/register', registerRoutes(db));
-app.use('/createQuiz',createQuizRoutes(db))
-app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
-
-// Note: mount other resources here, using the same pattern above
-
-
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -76,24 +64,45 @@ app.use('/logout', logoutRoutes()); // no need for data base since we are deleti
   res.render("index");
 }); */
 
+
 app.get("/", (req, res) => {
   //res.render('index', {user: req.cookies})
   const userId = loginUserId(req);
-  if ( !userId ) {
-    //res.redirect('index');
-    res.render('index', {user: req.cookies})
-  }
-  else {
-    getUserById(db, userId).then(user => {
-      if ( !user) {
-        res.redirect('login');
-      }
-      else {
-        res.render('index', {user});
-      }
-    });
-  }
+  getUserById(db, userId).then(user => {
+    if (!user) {
+      res.render('index', { user: {} });
+    }
+    else {
+      res.render('index', { user: user });
+    }
+  });
 });
+
+// LOGIN //
+app.use('/login', loginRoutes(db));
+app.use((req, res, next) => {
+  const userId = loginUserId(req);
+  getUserById(db, userId).then(user => {
+    if (!user) {
+      res.redirect('/');
+    }
+    else {
+      req.user = user;
+      next()
+    }
+  });
+})
+
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+app.use("/api/users", usersRoutes(db));
+app.use("/api/widgets", widgetsRoutes(db));
+app.use('/register', registerRoutes(db));
+app.use('/createQuiz', createQuizRoutes(db))
+app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
+
+// Note: mount other resources here, using the same pattern above
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
-    res.render('login', { user: req.cookies });
+    res.render('login', { user: {} });
   });
 
 
@@ -18,6 +18,8 @@ module.exports = (db) => {
     db.query(queryStr, values)
       .then(data => {
         const user = data.rows;
+        // console.log(user[0].id);
+        // res.cookie['userID'] = user[0].id
         res.cookie('userID', user[0].id);
         res.redirect('/');
       })
@@ -25,9 +27,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
-
-
 
   return router;
 };
