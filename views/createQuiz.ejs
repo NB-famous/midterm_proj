@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+  </script>
+
+  <!--FONTS-->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,900;1,800&display=swap"
+    rel="stylesheet">
+
+  <title>Home Page</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body id="main-body">
+  <%- include('partials/_header') %>
+  <!-- Top nav bar (fixed) -->
+  <div class="spacer">
+    &nbsp;
+  </div>
+
+  <main id="main_container">
+
+    <div class="container">
+      <form class="create_quiz" action="/createQuiz" method="POST">
+        <div class="form-group">
+          <label for="questionArea">Your Question Here</label>
+          <textarea name="question" class="form-control" id="inputQuestion" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="InputAnswer1">Answer 1</label>
+          <input type="text" name="answer1" class="form-control" id="InputAnswer1">
+        </div>
+        <div class="form-group">
+          <label for="InputAnswer2">Answer 2</label>
+          <input type="text" name="answer2" class="form-control" id="InputAnswer2">
+        </div>
+        <div class="form-group">
+          <label for="InputAnswer3">Answer 3</label>
+          <input type="text" name="answer3" class="form-control" id="InputAnswer3">
+        </div>
+        <div class="form-group">
+          <label for="InputAnswer4">Answer 4</label>
+          <input type="text" name="answer4" class="form-control" id="InputAnswer4">
+        </div>
+        <label for="quantity">Correct Answer (between 1 and 4):</label>
+        <input type="number" id="quantity" name="result" min="1" max="4">
+
+        <button type="submit" class="btn btn-primary" id="create-btn">CREATE QUIZ</button>
+      </form>
+    </div>
+
+
+  </main>
+
+  <%- include('partials/_footer') %>
+
+</body>
+
+</html>
