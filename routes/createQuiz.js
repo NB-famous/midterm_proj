@@ -2,8 +2,22 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
+  /* router.get('/', (req, res) => {
     res.render('createQuiz', {user: req.cookies});
+  }); */
+
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM quiz_questions;`)
+      .then(data => {
+        const quiz_questions = data.rows;
+        res.json({ quiz_questions });
+        res.render('createQuiz', {user: req.cookies});
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.post('/', (req, res) => {
