@@ -11,36 +11,35 @@ body#main-body{
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  position: fixed;
-  z-index: 2;
-  height: 300px;
-  width: 100%;
   padding: 1rem;
   background-image: url("/docs/question.png");
   border: 5px solid black;
   border-radius: 5px;
-
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 
   div.yourname{
-    height: auto;
-    width: auto;
     align-self: center;
-    margin-top: 100px;
+    color: grey;
     font-family: 'Raleway', sans-serif;
     font-size: 60px;
     font-weight: bold;
-    color: grey;
+    height: auto;
+    margin-top: 100px;
+    width: auto;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color:white;
 
   }
 
   button#login-btn{
-    margin-left: 20px;
     margin-bottom: 15px;
+    margin-left: 20px;
     margin-right: 35px;
   }
 
@@ -95,9 +94,9 @@ main {
   }
 
   div#question-container{
-    position: absolute;
     left: 10rem;
     margin-top: 100px;
+    position: absolute;
 
     div#quiz-box{
       margin-bottom: 5rem;
@@ -105,10 +104,10 @@ main {
 
     div.choice-container {
       display: flex;
+      font-size: 1.5rem;
+      height: 100%;
       margin-bottom: 0.5rem;
       width: 100%;
-      height: 100%;
-      font-size: 1.5rem;
     }
 
     .choice-container:hover {
@@ -119,11 +118,12 @@ main {
     }
 
     .choice-prefix {
-      padding: 1.5rem 2.5rem;
-      border-radius: 10px;
       margin-bottom: 0px;
       background-color: black;
+      border-radius: 10px;
       color: white;
+      margin-bottom: 0px;
+      padding: 1.5rem 2.5rem;
     }
 
     .choice-text {
