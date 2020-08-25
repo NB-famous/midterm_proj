@@ -21,7 +21,7 @@ module.exports = (db) => {
         // res.json(result.rows)
         const user = results.rows;
         // console.log(user);
-        res.cookie('resultID', user);
+        res.cookie('quizID', user);
         res.redirect('/createQuiz')
       })
       .catch(err => {

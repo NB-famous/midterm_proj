@@ -8,5 +8,5 @@ CREATE TABLE quiz_questions(
     answer3 TEXT,
     answer4 TEXT,
     result INTEGER,
-    quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
+    quiz_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 )

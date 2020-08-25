@@ -18,7 +18,6 @@ module.exports = (db) => {
     db.query(queryStr, values)
       .then(data => {
         const user = data.rows;
-        // console.log(user[0].id);
         // res.cookie['userID'] = user[0].id
         res.cookie('userID', user[0].id);
         res.redirect('/');
