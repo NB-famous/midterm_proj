@@ -6,5 +6,5 @@ $(() => {
     for(user of users) {
       $("<div>").text(user.email).appendTo($("div.added_users"));
     }
-  });;
+  });
 });
