@@ -3,21 +3,6 @@
 @import 'config';
 
 body#main-body{
-  background: $secondary-color;
-  height: 100vh;
-  background:
-    linear-gradient(
-      to right,
-      rgba(yellow, 0.5),
-      rgba(white, 0.5)
-      
-    ), 
-    url("/docs/yellow.png");
-  background-attachment: fixed;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-
 
   h1 {
     color: #244751;
@@ -26,37 +11,42 @@ body#main-body{
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  position: fixed;
-  z-index: 2;
-  height: 300px;
-  width: 100%;
   padding: 1rem;
-  background-image: url("/docs/question.png");
-  background-color: royalblue;
-  border: 5px solid black;
-  border-radius: 5px;
-
+  // background-color: #874600;
+  // background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+  // background-color: #7a5100;
+  background-color: #1d0042;
+  background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
+  // background-image: url("/docs/question.png");
+  // border: 5px solid #7a5100;
+  border: 10px solid #6d6a75;
+  // border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 
   div.yourname{
-    height: auto;
-    width: auto;
     align-self: center;
-    margin-top: 100px;
-    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-family: 'Bebas Neue', cursive;
+    // font-family: 'Raleway', sans-serif;
     font-size: 60px;
-    font-weight: bold;
-    color: grey;
-    -webkit-text-stroke-width: 1px; 
-    -webkit-text-stroke-color:white; 
+    // font-weight: bold;
+    height: auto;
+    margin-top: 70px;
+    width: auto;
+    // -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color:white;
 
   }
 
   button#login-btn{
-    margin-left: 20px;
     margin-bottom: 15px;
+    margin-left: 20px;
     margin-right: 35px;
   }
 
@@ -88,26 +78,31 @@ header {
 }
 
 main {
-  height: 100%;
-  width: 100%;
+  background: $secondary-color;
+  background-image: url("/docs/yellow.png");
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
 
+  height: 100%;
+  padding-bottom: 20rem;
+  width: 100%;
 
   .main-section{
     padding-left: 10%;
     padding-right: 10%;
-    margin-top: 50px;
-
+    padding-top: 50px;
   }
 
   button#create-btn{
     margin-left: 30px;
-    
+
   }
 
   div#question-container{
-    position: absolute;
     left: 10rem;
     margin-top: 100px;
+    position: absolute;
 
     div#quiz-box{
       margin-bottom: 5rem;
@@ -115,10 +110,10 @@ main {
 
     div.choice-container {
       display: flex;
+      font-size: 1.5rem;
+      height: 100%;
       margin-bottom: 0.5rem;
       width: 100%;
-      height: 100%;
-      font-size: 1.5rem;
     }
 
     .choice-container:hover {
@@ -127,55 +122,49 @@ main {
       transform: translateY(-0.1rem);
       transition: transform 150ms;
     }
-    
+
     .choice-prefix {
-      padding: 1.5rem 2.5rem;
-      border-radius: 10px;
       margin-bottom: 0px;
       background-color: black;
+      border-radius: 10px;
       color: white;
+      margin-bottom: 0px;
+      padding: 1.5rem 2.5rem;
     }
-    
+
     .choice-text {
       padding: 1rem;
-      
+
     }
 
   }
 
 }
 
+footer {
+  background-color:#6d6a75;
+  bottom: 0rem;
+  display: flex;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1rem;
+  // font-size: 30px;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 
 footer#not-log {
-
-  font-size: 1rem;
-  position: fixed;
-  z-index: 2;
-  bottom: 0.4rem;
   right: 1rem;
   text-align: right;
-  padding: 1rem;
-  font-family: 'Raleway', sans-serif;
-  font-size: 30px;
-  
 }
 
 footer#iAm-log {
-  display: flex;
-  font-size: 1rem;
-  position: fixed;
-  z-index: 2;
-  width: 100%;
-  bottom: 0.4rem;
   left: 1rem;
   padding: 1rem;
-  font-family: 'Raleway', sans-serif;
-  font-size: 30px;
-
+}
   section.log-copy{
     position: absolute;
     right: 1.5rem;
   }
-  
-}
 
+}
