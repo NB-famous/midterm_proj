@@ -1,50 +1,42 @@
 /// Trying to recreate functionality from tweeter.
 
-/* function createTweetElement(questionObj) {
-  let $tweetBox = $("<div>").addClass("question-container");
-  const html = `
-      <div id="game" class="justify-center flex-column">
-        <h2 id="quesiton">What is the answer to this questions?</h2>
+
+// This will append the api/showQuiz holding the api of our quiz_questions
+// Needed to create a new page that will render out api for this to work. 
+// Look at the code inside showQuiz.js or visit /api/showQuiz in the browser for more info.
+// basically i use this to grab the api created from our database table.
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/api/showQuiz"
+  }).done(({
+    quiz_questions
+  }) => {
+    for (user of quiz_questions) {
+      //$("<div>").text(user.question).appendTo($("div#tweets-container"));
+      const html = `
+      <div id="game">
+        <h2 id="question">${user.question}</h2>
         <div class="choice-container">
           <p class="choice-prefix">A</p>
-          <p class="choice-text">${questionObj.questionID.answer1}</p>
+          <p class="choice-text">${user.answer1}</p>
         </div>
         <div class="choice-container">
           <p class="choice-prefix">B</p>
-          <p class="choice-text">${questionObj.questionID.answer2}</p>
+          <p class="choice-text">${user.answer2}</p>
         </div>
         <div class="choice-container">
           <p class="choice-prefix">C</p>
-          <p class="choice-text">${questionObj.questionID.answer3}</p>
+          <p class="choice-text">${user.answer3}</p>
         </div>
         <div class="choice-container">
           <p class="choice-prefix">D</p>
-          <p class="choice-text">${questionObj.questionID.answer4}</p>
+          <p class="choice-text">${user.answer4}</p>
         </div>
       </div>
     `;
-  $tweetBox = $tweetBox.append(html);
-  return $tweetBox;
-};
+      let $questionBox = $(html).prependTo($("div#question-container"));
 
-function renderTweets(tweets) {
-  let $html = $('<div></div>');
-  tweets.forEach((tweet) => {
-    let newtweet = createTweetElement(tweet);
-    $html.prepend(newtweet);
-  })
-  $("#tweets-container").html($html);
-}
-
-function loadTweets() {
-  $.ajax({
-    url: '/createQuiz',
-    method: 'GET',
-    dataType: "json",
-    success: function (data) {
-      console.log('Success: ', data);
-      renderTweets(data);
     }
   });
-
-} */
+});

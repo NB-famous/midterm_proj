@@ -1,0 +1,11 @@
+
+<% if (!user.username) { %>
+    <footer id="not-log"> &copy; Copyright 2020</footer>
+<% } else { %>
+    <footer id="iAm-log">
+        <section><button type="submit" class="btn btn-primary" id="create-btn">SAVE QUIZ</button></section> 
+        <section class="log-copy">&copy; Copyright 2020</section>
+    </footer>
+<% } %>
+
+<!-- This is to remove a conflict create by the other footer ejs -->
