@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS results CASCADE;
 
 CREATE TABLE results(
     id SERIAL PRIMARY KEY NOT NULL,
-    score INTEGER,
+    score INTEGER NOT NULL DEFAULT 0,
     date_attempted DATE,
     quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE

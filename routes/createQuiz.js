@@ -10,11 +10,14 @@ module.exports = (db) => {
   router.post('/', (req, res) => {
 
     const { question, answer1, answer2, answer3, answer4, result } = req.body;
+    const owner_id = req.cookies['userID'];
+    //const quiz_id = req.cookies['quizID'];
+    //const owner_id = req.cookies;
 
     //Add the user in db
     const queryStr = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-      values: [question, answer1, answer2, answer3, answer4, result]
+      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+      values: [question, answer1, answer2, answer3, answer4, result, owner_id]
     };
     db.query(queryStr)
       .then(results => {
@@ -22,6 +25,7 @@ module.exports = (db) => {
         const user = results.rows;
         // console.log(user);
         res.cookie('quizID', user);
+
         res.redirect('/createQuiz')
       })
       .catch(err => {
