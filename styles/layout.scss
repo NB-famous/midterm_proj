@@ -8,6 +8,12 @@ body#main-body{
     color: #244751;
   }
 
+  background: $secondary-color;
+  //background-image: url("/docs/yellow.png");
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 header {
@@ -78,11 +84,6 @@ header {
 }
 
 main {
-  background: $secondary-color;
-  background-image: url("/docs/yellow.png");
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
 
   height: 100%;
   padding-bottom: 20rem;
