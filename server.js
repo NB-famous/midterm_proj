@@ -51,12 +51,14 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const createQuizRoutes = require('./routes/createQuiz');
 const loginRoutes = require('./routes/login');
 const logoutRoutes = require('./routes/logout');
 const registerRoutes = require('./routes/register');
-const createQuizRoutes = require('./routes/createQuiz');
+const myQuizRoutes = require('./routes/myQuizzes');
 const showQuizRoutes = require('./routes/showQuiz');
 const quizListRoutes = require('./routes/quizListApi');
+
 
 
 // Home page
@@ -103,6 +105,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db))
+app.use('/myQuiz', myQuizRoutes(db))
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above

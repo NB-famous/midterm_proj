@@ -34,7 +34,6 @@ module.exports = (db) => {
     // console.log(req.body);
     res.redirect('/');
   });
-  // Why you doing this to me baltej //
   return router;
 };
 

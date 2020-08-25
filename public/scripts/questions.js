@@ -11,6 +11,7 @@ $(() => {
   }).done(({
     quiz_questions
   }) => {
+    console.log(quiz_questions)
     for (user of quiz_questions) {
       //$("<div>").text(user.question).appendTo($("div#tweets-container"));
       const html = `

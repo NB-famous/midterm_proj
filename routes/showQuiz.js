@@ -5,7 +5,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM quiz_questions;`)
+    db.query(`SELECT * FROM quiz_questions;`) // calling the entire quiz_questions so query the id only.
       .then(data => {
         const quiz_questions = data.rows;
         res.json({
