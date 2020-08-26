@@ -25,6 +25,7 @@ module.exports = (db) => {
     const str = `INSERT INTO quizzes (creation_date, owner_id) VALUES(CURRENT_TIMESTAMP, $1) RETURNING *;`
     db.query(str, [owner_id]).then(result => {
       const quiz = result.rows[0];
+      res.cookie('quizID', quiz);
       console.log(quiz);
       const queryStr1 = {
       text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
@@ -44,7 +45,8 @@ module.exports = (db) => {
      };
      
       Promise.all([db.query(queryStr1), db.query(queryStr2), db.query(queryStr3), db.query(queryStr4)]).then(() => {
-        res.redirect('/createQuiz');
+        //res.redirect('/createQuiz');
+        res.redirect('/myQuiz');
       })
     })
     //Add the user in db

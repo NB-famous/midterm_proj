@@ -8,7 +8,6 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/showQuiz",
-    data: 6
   }).done(({
     quiz_questions
   }) => {

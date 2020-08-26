@@ -58,6 +58,7 @@ const registerRoutes = require('./routes/register');
 const myQuizRoutes = require('./routes/myQuizzes');
 const showQuizRoutes = require('./routes/showQuiz');
 const quizListRoutes = require('./routes/quizListApi');
+const attemptQuizRoutes = require('./routes/attemptQuiz');
 
 
 
@@ -104,8 +105,9 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
-app.use('/createQuiz', createQuizRoutes(db))
-app.use('/myQuiz', myQuizRoutes(db))
+app.use('/createQuiz', createQuizRoutes(db));
+app.use('/myQuiz', myQuizRoutes(db));
+app.use('/attemptQuiz', attemptQuizRoutes(db));
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
