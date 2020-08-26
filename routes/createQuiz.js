@@ -35,7 +35,7 @@ module.exports = (db) => {
 
     // creating a string for the query we want to make
     // putting it in a temperate literal b/c we want to use a javascript variable
-    let str = `INSERT INTO quizzes (is_public, creation_date, owner_id) VALUES(${checkbox}, CURRENT_TIMESTAMP, $1) RETURNING *;`;
+    let str = `INSERT INTO quizzes (is_private, creation_date, owner_id) VALUES(${checkbox}, CURRENT_TIMESTAMP, $1) RETURNING *;`;
     // making query for each insert question into the quiz_question table
     db.query(str, [owner_id]).then(result => {
       const quiz = result.rows[0];
