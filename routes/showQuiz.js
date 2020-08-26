@@ -17,6 +17,9 @@ module.exports = (db) => {
     WHERE quizzes.id = ${user_id};`) */
       .then(data => {
         const quiz_questions = data.rows;
+        res.cookie('questionID', quiz_questions);
+        console.log(JSON.stringify(req.cookies['questionID']));
+
         res.json({
           quiz_questions
         });

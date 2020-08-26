@@ -20,13 +20,13 @@ module.exports = (db) => {
     const owner_id = req.cookies['userID'];
     //const quiz_id = req.cookies['quizID'];
     //const owner_id = req.cookies;
-    console.log('this is answer3',q2Answer3)
-    console.log(owner_id);
+    //console.log('this is answer3',q2Answer3)
+    //console.log(owner_id);
     const str = `INSERT INTO quizzes (creation_date, owner_id) VALUES(CURRENT_TIMESTAMP, $1) RETURNING *;`
     db.query(str, [owner_id]).then(result => {
       const quiz = result.rows[0];
       res.cookie('quizID', quiz);
-      console.log(quiz);
+      console.log("this is the json quizzes", JSON.stringify(req.cookies['quizID']));
       const queryStr1 = {
       text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
       values: [question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result, owner_id, quiz.id]
