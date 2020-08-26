@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
       if (!user) {
         res.render('index', { user: {},
                               quizzes: quizzes,
-                            number: number.rows.count});
+                            number: number.rows});
       }
       else {
         res.render('index', { user: user,
