@@ -6,7 +6,7 @@ module.exports = (db) => {
     // create new quiz here in quizzess
     // get id on this quiz
     //req.cookies['quizID'] = new_id;
-    res.render('createQuiz', { user: req.user});
+    res.render('createQuiz', { user: req.user });
   });
 
 
@@ -22,31 +22,48 @@ module.exports = (db) => {
     //const owner_id = req.cookies;
 
     console.log(owner_id);
-    const str = `INSERT INTO quizzes (creation_date, owner_id) VALUES(CURRENT_TIMESTAMP, $1) RETURNING *;`
+
+    // need to figure out the value for is_private once i figure out the checkbox
+    // $checked = ($_POST['checkbox']) ? 1 : 0; sql = "INSERT INTO table VALUES ($checked);
+    const str = `INSERT INTO quizzes (is_public, creation_date, owner_id) VALUES(false, CURRENT_TIMESTAMP, $1) RETURNING *;`
     db.query(str, [owner_id]).then(result => {
       const quiz = result.rows[0];
       console.log(quiz);
       const queryStr1 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result, owner_id, quiz.id]
-     };
-     const queryStr2 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result, owner_id, quiz.id]
-     };
-     const queryStr3 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question3, q3Answer1, q3Answer2, q3Answer3, q3Answer4, q3Result, owner_id, quiz.id]
-     };
-     const queryStr4 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result, owner_id, quiz.id]
-     };
-     
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result, owner_id, quiz.id]
+      };
+      const queryStr2 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result, owner_id, quiz.id]
+      };
+      const queryStr3 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question3, q3Answer1, q3Answer2, q3Answer3, q3Answer4, q3Result, owner_id, quiz.id]
+      };
+      const queryStr4 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result, owner_id, quiz.id]
+      };
+
       Promise.all([db.query(queryStr1), db.query(queryStr2), db.query(queryStr3), db.query(queryStr4)]).then(() => {
         res.redirect('/createQuiz');
       })
     })
+
+    function myFunction() {
+      // Get the checkbox
+      var checkBox = document.getElementById("myCheck");
+      // Get the output text
+      var text = document.getElementById("text");
+
+      // If the checkbox is checked, display the output text
+      if (checkBox.checked == true) {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+    }
     //Add the user in db
     /* const queryStr = {
       text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,

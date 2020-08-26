@@ -1,4 +1,5 @@
 <%- include('partials/_doc') %>
+
 <body id="main-body">
   <%- include('partials/_header') %>
   <!-- Top nav bar (fixed) -->
@@ -103,7 +104,8 @@
         <input type="number" id="quantity" name="q4Result" min="1" max="4">
 
         <button type="submit" class="btn btn-primary" id="create-btn">ADD QUESTION</button>
-
+        <!-- can make this a check box to make it a private quiz -->
+        <input type="checkbox" id="myCheck" onclick="myFunction()">MAKE IT PRIVATE!</input>
 
       </form>
     </div>

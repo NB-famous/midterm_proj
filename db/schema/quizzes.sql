@@ -16,7 +16,7 @@ CREATE TABLE quizzes(
 
     id SERIAL PRIMARY KEY NOT NULL,
     /*NEED MORE INFO FOR BOOLEAN*/
-    is_public BOOLEAN NOT NULL DEFAULT TRUE,
+    is_private BOOLEAN DEFAULT FALSE,
     creation_date DATE,
     owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
