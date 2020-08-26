@@ -13,7 +13,6 @@ CREATE TABLE users (
 );
 
 CREATE TABLE quizzes(
-
     id SERIAL PRIMARY KEY NOT NULL,
     is_private BOOLEAN DEFAULT FALSE,
     creation_date DATE,
