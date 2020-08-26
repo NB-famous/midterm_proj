@@ -16,7 +16,8 @@ CREATE TABLE quizzes(
     id SERIAL PRIMARY KEY NOT NULL,
     is_private BOOLEAN DEFAULT FALSE,
     creation_date DATE,
-    owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+    owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    short_url TEXT
 );
 
 CREATE TABLE quiz_questions(
@@ -46,3 +47,8 @@ CREATE TABLE results(
     owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
+ALTER TABLE quiz_questions owner TO labber;
+ALTER TABLE quiz_answers owner TO labber;
+ALTER TABLE quizzes owner TO labber;
+ALTER TABLE results owner TO labber;
+ALTER TABLE users owner TO labber;

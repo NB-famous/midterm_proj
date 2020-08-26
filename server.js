@@ -18,7 +18,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById } = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts} = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -62,6 +62,12 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
 
 
 
+
+
+
+
+
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -74,14 +80,27 @@ app.get("/", (req, res) => {
   //res.render('index', {user: req.cookies})
   const userId = loginUserId(req);
   getUserById(db, userId).then(user => {
-    if (!user) {
-      res.render('index', { user: {} });
-    }
-    else {
-      res.render('index', { user: user });
-    }
-  });
-});
+    getPublicQuizzes(db)
+    .then(quizzes => {
+      console.log("QUIZZESSS", quizzes);
+      numberofQuizAttempts(db, quizzes.id)
+      .then(number => {
+        console.log("NUMBER OF ATTEMPTS", number);
+      if (!user) {
+        res.render('index', { user: {},
+                              quizzes: quizzes,
+                            number: number[0].numberofattempts});
+      }
+      else {
+        res.render('index', { user: user,
+                              quizzes: quizzes,
+                            number: number[0].numberofattempts});
+                            }
+                          })
+                        })
+                      });
+                    });
+
 
 // LOGIN //
 app.use('/login', loginRoutes(db));
