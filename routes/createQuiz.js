@@ -10,6 +10,18 @@ module.exports = (db) => {
   });
 
 
+// Helper function for short URL
+function generateRandomString() {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 8; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+
   router.post('/', (req, res) => {
     console.log(req.body);
     const { question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result } = req.body;
@@ -22,8 +34,8 @@ module.exports = (db) => {
     //const owner_id = req.cookies;
     console.log('this is answer3',q2Answer3)
     console.log(owner_id);
-    const str = `INSERT INTO quizzes (creation_date, owner_id) VALUES(CURRENT_TIMESTAMP, $1) RETURNING *;`
-    db.query(str, [owner_id]).then(result => {
+    const str = `INSERT INTO quizzes (creation_date, owner_id, short_url) VALUES(CURRENT_TIMESTAMP, $1, $2) RETURNING *;`
+    db.query(str, [owner_id, generateRandomString()]).then(result => {
       const quiz = result.rows[0];
       res.cookie('quizID', quiz);
       console.log(quiz);
@@ -43,7 +55,7 @@ module.exports = (db) => {
       text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
       values: [question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result, owner_id, quiz.id]
      };
-     
+
       Promise.all([db.query(queryStr1), db.query(queryStr2), db.query(queryStr3), db.query(queryStr4)]).then(() => {
         //res.redirect('/createQuiz');
         res.redirect('/myQuiz');

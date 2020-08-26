@@ -13,8 +13,9 @@ const getUserById = function (db, id) {
 
 const numberofQuizAttempts = function (db,id) {
   return db
-  .query(`SELECT COUNT(*) FROM results
+  .query(`SELECT COUNT(*) as numberofAttempts FROM results
   WHERE quiz_id = $1;`, [id])
   .then(res => res.rows)
 }
+
   module.exports = {getUserById, getPublicQuizzes, numberofQuizAttempts};

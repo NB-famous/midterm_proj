@@ -24,7 +24,7 @@
             <%for (let quiz of quizzes) {%>
           <tr>
             <td> <%= quiz.id %></td>
-            <td><a href="#">/quiz/id (get route) Url of created quiz goes here/ short url that can be shared</a></td>
+            <td><a href="#"> <%= quiz.short_url %></a></td>
             <td><%= number %> </td>
             <td>
               <form method="POST" action="/createQuiz">

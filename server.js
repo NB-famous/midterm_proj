@@ -62,6 +62,12 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
 
 
 
+
+
+
+
+
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -83,12 +89,12 @@ app.get("/", (req, res) => {
       if (!user) {
         res.render('index', { user: {},
                               quizzes: quizzes,
-                            number: number.rows});
+                            number: number[0].numberofattempts});
       }
       else {
         res.render('index', { user: user,
                               quizzes: quizzes,
-                            number: number.rows});
+                            number: number[0].numberofattempts});
                             }
                           })
                         })
