@@ -6,5 +6,8 @@ module.exports = (db) => {
     res.render('attemptQuiz', { user: req.user });
   });
 
+
+  
+
   return router;
 };
