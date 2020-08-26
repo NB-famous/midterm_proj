@@ -5,7 +5,10 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM quiz_questions;`) // calling the entire quiz_questions so query the id only.
+    console.log(`userid, ${JSON.stringify(req.cookies['userID'])}`)
+    let user_id = req.cookies['userID']
+    db.query(`SELECT * FROM quiz_questions WHERE owner_id = ${user_id};`) // calling the entire quiz_questions so query the id only.
+    // figure out what goes inside ${what goes here ?} instead of 1;
       .then(data => {
         const quiz_questions = data.rows;
         res.json({

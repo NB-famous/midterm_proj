@@ -16,11 +16,11 @@ module.exports = (db) => {
     const { question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result } = req.body;
     const { question3, q3Answer1, q3Answer2, q3Answer3, q3Answer4, q3Result } = req.body;
     const { question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result } = req.body;
-    console.log(req.body)
+    console.log('req.body is here',req.body)
     const owner_id = req.cookies['userID'];
     //const quiz_id = req.cookies['quizID'];
     //const owner_id = req.cookies;
-
+    console.log('this is answer3',q2Answer3)
     console.log(owner_id);
     const str = `INSERT INTO quizzes (creation_date, owner_id) VALUES(CURRENT_TIMESTAMP, $1) RETURNING *;`
     db.query(str, [owner_id]).then(result => {
