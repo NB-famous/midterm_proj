@@ -38,7 +38,6 @@ CREATE TABLE quiz_answers(
     /*Not sure which data type answer should be*/
     result INTEGER,
     quiz_question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE
-
 );
 
 CREATE TABLE results(

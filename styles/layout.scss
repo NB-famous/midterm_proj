@@ -72,9 +72,8 @@ header {
   }
 
   button#myquiz-btn{
-    margin-right: 20px;
+    margin-right: 10px;
   }
-
 }
 
 .spacer
@@ -154,9 +153,14 @@ footer {
   width: 100%;
   z-index: 2;
 
+button.btn.btn-primary {
+  margin-right: 10px;
+}
+
 footer#not-log {
   right: 1rem;
   text-align: right;
+
 }
 
 footer#iAm-log {
