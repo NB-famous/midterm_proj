@@ -19,10 +19,10 @@
             <th scope="col"></th>
           </tr>
         <tbody style="margin: 1em;">
+            <%for (let quiz of quizzes) {%>
           <tr>
-            <td>Title of created quiz </td>
-
-            <td><a href="#">Url of created quiz goes here/ short url that can be shared</a></td>
+            <td> <%= quiz.id %></td>
+            <td><a href="#">/quiz/id (get route) Url of created quiz goes here/ short url that can be shared</a></td>
             <td>Count of users attempted quiz/ counter </td>
             <td>
               <form method="POST" action="/createQuiz">
@@ -30,6 +30,7 @@
               </form>
             </td>
           </tr>
+         <% } %>
         </tbody>
         </thead>
       </table>
