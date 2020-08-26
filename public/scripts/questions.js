@@ -7,7 +7,7 @@
 $(() => {
   $.ajax({
     method: "GET",
-    url: "/api/showQuiz"
+    url: "/api/showQuiz",
   }).done(({
     quiz_questions
   }) => {

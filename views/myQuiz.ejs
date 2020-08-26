@@ -1,14 +1,45 @@
 <%- include('partials/_doc') %>
 
+<title>MY QUIZ</title>
+
 <body id="main-body">
   <%- include('partials/_header') %>
   <!-- Top nav bar (fixed) -->
   <div class="spacer">
     &nbsp;
   </div>
-
   <main id="main_container">
-    <div id="question-container"></div>
+
+    <div class="main-section">
+      <h3>MY CREATED QUIZZES</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Quiz Url</th>
+            <!-- <th scope="col">Number Of Users Attempted</th> -->
+            <th scope="col"></th>
+          </tr>
+        <tbody style="margin: 1em;">
+          <tr>
+            <td>Title of created quiz </td>
+
+            <td><a href="/attemptQuiz">Url of created quiz goes here/ short url that can be shared</a></td>
+            <!-- <td>Count of users attempted quiz/ counter </td> -->
+            <td>
+              <form method="GET" action="/attemptQuiz">
+                <button class="btn-attempt" type="submit">Attempt Quiz</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+        </thead>
+      </table>
+
+
+      <div class="added_users"></div>
+
+    </div>
   </main>
 
   <%- include('partials/_footer') %>
