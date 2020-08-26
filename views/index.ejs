@@ -27,7 +27,7 @@
             <td><a href="#"> <%= quiz.short_url %></a></td>
             <td><%= number %> </td>
             <td>
-              <form method="POST" action="/createQuiz">
+              <form method="GET" action="/attemptQuiz">
                 <button class="btn-attempt" type="submit">Attempt Quiz</button>
               </form>
             </td>
