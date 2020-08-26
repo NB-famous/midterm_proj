@@ -18,7 +18,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes } = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts} = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -76,17 +76,24 @@ app.get("/", (req, res) => {
     getPublicQuizzes(db)
     .then(quizzes => {
       console.log("QUIZZESSS", quizzes);
+      numberofQuizAttempts(db, quizzes.id)
+      .then(number => {
+        console.log("NUMBER OF ATTEMPTS", number);
       if (!user) {
         res.render('index', { user: {},
-                              quizzes: quizzes });
+                              quizzes: quizzes,
+                            number: number.rows.count});
       }
       else {
         res.render('index', { user: user,
-                              quizzes: quizzes });
-      }
-    })
-  });
-});
+                              quizzes: quizzes,
+                            number: number.rows});
+                            }
+                          })
+                        })
+                      });
+                    });
+
 
 // LOGIN //
 app.use('/login', loginRoutes(db));
