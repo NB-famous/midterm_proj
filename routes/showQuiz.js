@@ -7,7 +7,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     //console.log(`userid, ${JSON.stringify(req.cookies['userID'])}`)
     let user_id = req.cookies['userID'];
-    console.log('questionID cookie:', req.cookies['questionID'][0].quiz_id);
+    console.log('questionID cookie:', req.cookies['questionID'][0]['quiz_id']);
     console.log('quizID cookie:', req.cookies['quizID']);
     db.query(`SELECT * FROM quiz_questions WHERE owner_id = ${user_id};`) // calling the entire quiz_questions so query the id only.
     // figure out what goes inside ${what goes here ?} instead of 1;
