@@ -7,7 +7,7 @@ const getUserById = function (db, id) {
 
   const getPublicQuizzes = function (db) {
     return db
-      .query(`SELECT * FROM quizzes WHERE is_public = true ORDER BY creation_date LIMIT 20;`)
+      .query(`SELECT * FROM quizzes WHERE is_private = false ORDER BY creation_date LIMIT 20;`)
       .then(res => res.rows);
   };
 
