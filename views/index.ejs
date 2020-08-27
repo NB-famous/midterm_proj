@@ -24,7 +24,7 @@
           <%for (let quiz of quizzes) {%>
           <tr>
             <td> <%= quiz.id %></td>
-            <td><a href="#"> <%= quiz.short_url %></a></td>
+            <td><a href="/attemptQuiz/:id"> <%= quiz.short_url %></a></td>
             <td><%= number %> </td>
             <td>
               <form method="GET" action="/attemptQuiz/<%= quiz.short_url %>">
