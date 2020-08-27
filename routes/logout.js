@@ -4,8 +4,7 @@ const router = express.Router();
 module.exports = () => {
   router.post('/', (req, res) => {
     res.clearCookie('userID');
-    res.redirect('/login');
+    res.redirect('/');
   });
-
   return router;
 };
