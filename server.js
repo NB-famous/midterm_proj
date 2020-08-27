@@ -20,7 +20,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts } = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl} = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -73,6 +73,9 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
   res.render("index");
 }); */
 
+// THIS NEEDS TO BE ABOVE THE INDEX GET
+app.use('/attemptQuiz/:shorturl', attemptQuizRoutes(db));
+
 
 app.get("/", (req, res) => {
   //res.render('index', {user: req.cookies})
@@ -80,25 +83,36 @@ app.get("/", (req, res) => {
   getUserById(db, userId).then(user => {
     getPublicQuizzes(db)
       .then(quizzes => {
+        let urlParam = req.originalUrl.slice(0, -1).split('/');
         console.log("QUIZZESSS", quizzes);
-        numberofQuizAttempts(db, quizzes.id)
+        getQuizByShortUrl(db, urlParam[2])
+        .then(shorturl => {
+          console.log(`shour :${shorturl}`)
+          numberofQuizAttempts(db, quizzes.id)
           .then(number => {
             console.log("NUMBER OF ATTEMPTS", number);
             if (!user) {
+              console.log(`not logged quizzes: ${JSON.stringify(quizzes)}`)
               res.render('index', {
                 user: {},
                 quizzes: quizzes,
+                shorturl:shorturl,
                 number: number[0].numberofattempts
               });
             } else {
+              console.log(`logged quizzes: ${JSON.stringify(quizzes)}`)
               res.render('index', {
                 user: user,
                 quizzes: quizzes,
+                shorturl:shorturl,
                 number: number[0].numberofattempts
               });
             }
-          })
-      })
+          });
+
+        });
+        
+      });
   });
 });
 
@@ -126,7 +140,7 @@ app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db));
 app.use('/myQuiz', myQuizRoutes(db));
-app.use('/attemptQuiz/:shorturl', attemptQuizRoutes(db));
+
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
