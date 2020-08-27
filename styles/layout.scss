@@ -9,7 +9,6 @@ body#main-body{
   }
 
   background: $secondary-color;
-  //background-image: url("/docs/yellow.png");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,15 +17,9 @@ body#main-body{
 
 header {
   padding: 1rem;
-  // background-color: #874600;
-  // background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
-  // background-color: #7a5100;
   background-color: #1d0042;
   background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
-  // background-image: url("/docs/question.png");
-  // border: 5px solid #7a5100;
   border: 10px solid #6d6a75;
-  // border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -39,15 +32,10 @@ header {
     align-self: center;
     color: white;
     font-family: 'Bebas Neue', cursive;
-    // font-family: 'Raleway', sans-serif;
     font-size: 60px;
-    // font-weight: bold;
     height: auto;
     margin-top: 70px;
     width: auto;
-    // -webkit-text-stroke-width: 1px;
-    // -webkit-text-stroke-color:white;
-
   }
 
   button#login-btn{
@@ -74,6 +62,7 @@ header {
   button#myquiz-btn{
     margin-right: 10px;
   }
+
 }
 
 .spacer
@@ -95,8 +84,7 @@ main {
   }
 
   button#create-btn{
-    margin-left: 30px;
-
+    margin: 20px;
   }
 
   div#question-container{
@@ -136,9 +124,7 @@ main {
       padding: 1rem;
 
     }
-
   }
-
 }
 
 footer {
@@ -147,7 +133,6 @@ footer {
   display: flex;
   font-family: 'Bebas Neue', cursive;
   font-size: 1rem;
-  // font-size: 30px;
   padding: 1rem;
   position: fixed;
   width: 100%;
