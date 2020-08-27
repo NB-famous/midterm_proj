@@ -71,6 +71,10 @@ header {
     height: 300px;
 }
 
+main#main_box{
+  margin-left: 200px;
+}
+
 main {
 
   height: 100%;
@@ -91,7 +95,7 @@ main {
     font-size: 25px;
   }
 
-  div#question-container{
+  div.question-container{
     left: 10rem;
     margin-top: 100px;
     position: absolute;

@@ -12,9 +12,9 @@
     &nbsp;
   </div>
 
-  <main id="main_container">
+  <main id="main_box">
 
-    <div id="questions-container"></div>
+    <div class="question-container">
       <!-- open here -->
       <% shorturl.forEach(quiz => { %>
       <div id="quiz-box">
@@ -22,23 +22,30 @@
         <div class="choice-container">
           <p class="choice-prefix">A</p>
           <p class="choice-text" data-number="1"><%= quiz.answer1 %></p>
+          <input type="radio" id="answerA" value="<%= quiz.result %>">
         </div>
         <div class="choice-container">
           <p class="choice-prefix">B</p>
           <p class="choice-text" data-number="2"><%= quiz.answer2 %></p>
+          <input type="radio" id="answerB" value="<%= quiz.result %>">
         </div>
         <div class="choice-container">
           <p class="choice-prefix">C</p>
           <p class="choice-text" data-number="3"><%= quiz.answer3 %></p>
+          <input type="radio" id="answerC" value="<%= quiz.result %>">
         </div>
         <div class="choice-container">
           <p class="choice-prefix">D</p>
           <p class="choice-text" data-number="4"><%= quiz.answer4 %></p>
+          <input type="radio" id="answerD" value="<%= quiz.result %>">
         </div>
         <div><%= quiz.result %></div>
       </div>
+    
 
     <% }) %>
+
+  </div>
     <!-- close here -->
   </main>
 
