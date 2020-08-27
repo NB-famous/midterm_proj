@@ -18,7 +18,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts} = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizID} = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -77,6 +77,7 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
 
 
 app.get("/", (req, res) => {
+  console.log("TESTER", res);
   //res.render('index', {user: req.cookies})
   const userId = loginUserId(req);
   getUserById(db, userId).then(user => {
@@ -102,6 +103,15 @@ app.get("/", (req, res) => {
                     });
 
 
+app.get("/attemptQuiz/:id", (req,res) => {
+  console.log("SOMETHING", req.body);
+
+  getQuizID(db, quizID)
+  .then(quiz => {
+    console.log("WHAT is get quiz id", db, quizID)
+  }).catch(e => console.log("what is error", e))
+})
+
 // LOGIN //
 app.use('/login', loginRoutes(db));
 app.use('/register', registerRoutes(db));
@@ -126,7 +136,7 @@ app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db));
 app.use('/myQuiz', myQuizRoutes(db));
-app.use('/attemptQuiz', attemptQuizRoutes(db));
+app.use('/attemptQuiz/:id', attemptQuizRoutes(db));
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
