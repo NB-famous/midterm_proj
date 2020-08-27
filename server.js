@@ -13,13 +13,21 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const {
+  Pool
+} = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts} = require('./db/database');
-const { loginUserId } = require('./get_cookie');
+const {
+  getUserById,
+  getPublicQuizzes,
+  numberofQuizAttempts
+} = require('./db/database');
+const {
+  loginUserId
+} = require('./get_cookie');
 
 db.connect();
 
@@ -37,7 +45,9 @@ app.use(cookieSession({
   keys: ["I am not doing so well"],
 }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -62,12 +72,6 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
 
 
 
-
-
-
-
-
-
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -81,25 +85,28 @@ app.get("/", (req, res) => {
   const userId = loginUserId(req);
   getUserById(db, userId).then(user => {
     getPublicQuizzes(db)
-    .then(quizzes => {
-      console.log("QUIZZESSS", quizzes);
-      numberofQuizAttempts(db, quizzes.id)
-      .then(number => {
-        console.log("NUMBER OF ATTEMPTS", number);
-      if (!user) {
-        res.render('index', { user: {},
-                              quizzes: quizzes,
-                            number: number[0].numberofattempts});
-      }
-      else {
-        res.render('index', { user: user,
-                              quizzes: quizzes,
-                            number: number[0].numberofattempts});
-                            }
-                          })
-                        })
-                      });
-                    });
+      .then(quizzes => {
+        console.log("QUIZZESSS", quizzes);
+        numberofQuizAttempts(db, quizzes.id)
+          .then(number => {
+            console.log("NUMBER OF ATTEMPTS", number);
+            if (!user) {
+              res.render('index', {
+                user: {},
+                quizzes: quizzes,
+                number: number[0].numberofattempts
+              });
+            } else {
+              res.render('index', {
+                user: user,
+                quizzes: quizzes,
+                number: number[0].numberofattempts
+              });
+            }
+          })
+      })
+  });
+});
 
 
 // LOGIN //
@@ -110,8 +117,7 @@ app.use((req, res, next) => {
   getUserById(db, userId).then(user => {
     if (!user) {
       res.redirect('/');
-    }
-    else {
+    } else {
       req.user = user;
       next()
     }
