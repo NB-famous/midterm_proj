@@ -1,4 +1,3 @@
-
 <!--font awesome-->
 <header id='user_header'>
   <% if (!user.username) { %>
@@ -21,23 +20,26 @@
 
   <% } else { %>
 
-    <div class="yourname">
-      Welcome <%= user.username %> !
-    </div>
-    <ul class="nav nav-pills" id="when-login">
-      <li class="home-item">
-        <a href="/"><button type="button" id="user-home-btn" class="btn btn-primary btn-lg"><i class="fas fa-home"></i></button></a>
-      </li>
-      <li class="my-quiz">
-        <a href="/myQuiz"><button type="button" id="myquiz-btn" class="btn btn-primary btn-lg">My Quizzes</button></a>
-      </li>
-      <li class="create-quiz">
-        <a href="/createQuiz"><button type="button" id="createquiz-btn" class="btn btn-primary btn-lg">Create Quiz</button></a>
-      </li>
-      <li class="logout-item">
-        <form method="POST" action="/logout"><button type="submit" id="logout-btn" class="btn btn-secondary btn-lg">Logout</button></form>
-      </li>
-    </ul>
-    <% } %>
+  <div class="yourname">
+    Welcome <%= user.username %> !
+  </div>
+  <ul class="nav nav-pills" id="when-login">
+    <li class="home-item">
+      <a href="/"><button type="button" id="user-home-btn" class="btn btn-primary btn-lg"><i
+            class="fas fa-home"></i></button></a>
+    </li>
+    <li class="my-quiz">
+      <a href="/myQuiz"><button type="button" id="myquiz-btn" class="btn btn-primary btn-lg">My Quizzes</button></a>
+    </li>
+    <li class="create-quiz">
+      <a href="/createQuiz"><button type="button" id="createquiz-btn" class="btn btn-primary btn-lg">Create
+          Quiz</button></a>
+    </li>
+    <li class="logout-item">
+      <form method="POST" action="/logout"><button type="submit" id="logout-btn"
+          class="btn btn-primary btn-lg">Logout</button></form>
+    </li>
+  </ul>
+  <% } %>
 
 </header>
