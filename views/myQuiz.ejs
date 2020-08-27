@@ -11,30 +11,32 @@
   <main id="main_container">
 
     <div class="main-section">
-      <h3>MY PRIVATE QUIZZES</h3>
+      <h3>MY CREATED QUIZZES</h3>
       <table class="table">
         <thead>
           <tr>
             <th scope="col">Title</th>
             <th scope="col">Quiz Url</th>
+            <th scope="col">Quiz Status</th>
             <th scope="col">Number Of Users Attempted</th>
-            <th scope="col"></th>
+            <th scope="col">TRY THE QUIZ</th>
           </tr>
         <tbody style="margin: 1em;">
-            <%for (let quiz of quizzes) {%>
+          <%for (let quiz of quizzes) {%>
           <tr>
-            <% if(quiz.is_private === true){ %>
             <td> <%= quiz.id %></td>
             <td><a href="#"> <%= quiz.short_url %></a></td>
+            <% if(quiz.is_private === true){ %> <td> Private</td>
+            <% } else { %> <td> Public </td>
+            <% } %>
             <td><%= number %> </td>
             <td>
-              <form method="GET" action="/attemptQuiz">
+              <form method="GET" action="/attemptQuiz/<%= quiz.short_url %>">
                 <button class="btn btn-primary btn-lg" type="submit">Attempt Quiz</button>
               </form>
             </td>
           </tr>
           <% } %>
-         <% } %>
         </tbody>
         </thead>
       </table>
