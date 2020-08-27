@@ -18,7 +18,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts} = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts } = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -60,14 +60,6 @@ const showQuizRoutes = require('./routes/showQuiz');
 const quizListRoutes = require('./routes/quizListApi');
 const attemptQuizRoutes = require('./routes/attemptQuiz');
 
-
-
-
-
-
-
-
-
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -81,25 +73,29 @@ app.get("/", (req, res) => {
   const userId = loginUserId(req);
   getUserById(db, userId).then(user => {
     getPublicQuizzes(db)
-    .then(quizzes => {
-      console.log("QUIZZESSS", quizzes);
-      numberofQuizAttempts(db, quizzes.id)
-      .then(number => {
-        console.log("NUMBER OF ATTEMPTS", number);
-      if (!user) {
-        res.render('index', { user: {},
-                              quizzes: quizzes,
-                            number: number[0].numberofattempts});
-      }
-      else {
-        res.render('index', { user: user,
-                              quizzes: quizzes,
-                            number: number[0].numberofattempts});
-                            }
-                          })
-                        })
-                      });
-                    });
+      .then(quizzes => {
+        console.log("QUIZZESSS", quizzes);
+        numberofQuizAttempts(db, quizzes.id)
+          .then(number => {
+            console.log("NUMBER OF ATTEMPTS", number);
+            if (!user) {
+              res.render('index', {
+                user: {},
+                quizzes: quizzes,
+                number: number[0].numberofattempts
+              });
+            }
+            else {
+              res.render('index', {
+                user: user,
+                quizzes: quizzes,
+                number: number[0].numberofattempts
+              });
+            }
+          })
+      })
+  });
+});
 
 
 // LOGIN //
@@ -130,7 +126,6 @@ app.use('/attemptQuiz', attemptQuizRoutes(db));
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
