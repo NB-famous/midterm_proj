@@ -11,10 +11,10 @@ module.exports = (db) => {
 
   // Helper function for short URL
   function generateRandomString() {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < 8; i++ ) {
+    for (var i = 0; i < 8; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
@@ -22,15 +22,15 @@ module.exports = (db) => {
 
   router.post('/', (req, res) => {
 
-     // req.body is the data from the form
-     console.log('BEFORE REQ BODY:', req.body);
-     // if the checkbox is being sent back (the box is checked)
-     // set the value to true (is private)
-     if (req.body.checkbox) {
-       req.body.checkbox = 'true';
-     } else {
-       req.body.checkbox = 'false';
-     }
+    // req.body is the data from the form
+    console.log('BEFORE REQ BODY:', req.body);
+    // if the checkbox is being sent back (the box is checked)
+    // set the value to true (is private)
+    if (req.body.checkbox) {
+      req.body.checkbox = 'true';
+    } else {
+      req.body.checkbox = 'false';
+    }
 
     const { question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result } = req.body;
     const { question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result } = req.body;
@@ -48,42 +48,25 @@ module.exports = (db) => {
       const quiz = result.rows[0];
       res.cookie('quizID', quiz);
       const queryStr1 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result, owner_id, quiz.id]
-     };
-     const queryStr2 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result, owner_id, quiz.id]
-     };
-     const queryStr3 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question3, q3Answer1, q3Answer2, q3Answer3, q3Answer4, q3Result, owner_id, quiz.id]
-     };
-     const queryStr4 = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      values: [question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result, owner_id, quiz.id]
-     };
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question1, q1Answer1, q1Answer2, q1Answer3, q1Answer4, q1Result, owner_id, quiz.id]
+      };
+      const queryStr2 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question2, q2Answer1, q2Answer2, q2Answer3, q2Answer4, q2Result, owner_id, quiz.id]
+      };
+      const queryStr3 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question3, q3Answer1, q3Answer2, q3Answer3, q3Answer4, q3Result, owner_id, quiz.id]
+      };
+      const queryStr4 = {
+        text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id, quiz_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        values: [question4, q4Answer1, q4Answer2, q4Answer3, q4Answer4, q4Result, owner_id, quiz.id]
+      };
       Promise.all([db.query(queryStr1), db.query(queryStr2), db.query(queryStr3), db.query(queryStr4)]).then(() => {
         res.redirect('/myQuiz');
       })
     })
-    //Add the user in db
-    /* const queryStr = {
-      text: `INSERT INTO quiz_questions(question, answer1, answer2, answer3, answer4, result, owner_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      values: [question, answer1, answer2, answer3, answer4, result, owner_id]
-    };
-    db.query(queryStr)
-      .then(results => {
-        // res.json(result.rows)
-        const user = results.rows;
-        // console.log(user);
-        res.cookie('quizID', user);
-
-        res.redirect('/createQuiz')
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      }); */
   });
 
   return router;

@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  // console.log(db);
   router.get('/', (req, res) => {
     res.render('register', { user: {} });
   });
@@ -19,7 +18,6 @@ module.exports = (db) => {
     };
     db.query(queryStr)
       .then(result => {
-        //res.json(result.rows)
         const user = result.rows;
         res.cookie('userID', user[0].id);
         res.redirect('/')
@@ -31,7 +29,6 @@ module.exports = (db) => {
   });
 
   router.post('/', (req, res) => {
-    // console.log(req.body);
     res.redirect('/');
   });
   return router;
