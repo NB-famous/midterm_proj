@@ -126,7 +126,7 @@ app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db));
 app.use('/myQuiz', myQuizRoutes(db));
-app.use('/attemptQuiz', attemptQuizRoutes(db));
+app.use('/attemptQuiz/:shorturl', attemptQuizRoutes(db));
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
