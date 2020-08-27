@@ -103,6 +103,17 @@ app.get("/", (req, res) => {
 });
 
 
+
+
+app.get("/attemptQuiz/:shorturl", (req,res) => {
+  console.log("SOMETHING", req.body);
+  const quizID = req.params.shorturl
+  getQuizID(db, quizID)
+  .then(quiz => {
+    console.log("WHAT is get quiz id", db, quizID)
+  }).catch(e => console.log("what is error", e))
+})
+
 // LOGIN //
 app.use('/login', loginRoutes(db));
 app.use('/register', registerRoutes(db));
