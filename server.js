@@ -13,7 +13,9 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const {
+  Pool
+} = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
@@ -37,7 +39,9 @@ app.use(cookieSession({
   keys: ["I am not doing so well"],
 }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -59,6 +63,8 @@ const myQuizRoutes = require('./routes/myQuizzes');
 const showQuizRoutes = require('./routes/showQuiz');
 const quizListRoutes = require('./routes/quizListApi');
 const attemptQuizRoutes = require('./routes/attemptQuiz');
+
+
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -84,8 +90,7 @@ app.get("/", (req, res) => {
                 quizzes: quizzes,
                 number: number[0].numberofattempts
               });
-            }
-            else {
+            } else {
               res.render('index', {
                 user: user,
                 quizzes: quizzes,
@@ -106,8 +111,7 @@ app.use((req, res, next) => {
   getUserById(db, userId).then(user => {
     if (!user) {
       res.redirect('/');
-    }
-    else {
+    } else {
       req.user = user;
       next()
     }
