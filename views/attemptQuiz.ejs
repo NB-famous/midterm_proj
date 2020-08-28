@@ -24,25 +24,32 @@
           <h2 id="question"><%= quiz.question %></h2>
           <div class="choice-container">
             <p class="choice-prefix">A</p>
-            <p class="choice-text" data-number="1"><%= quiz.answer1 %></p>
-            <input type="radio" class="quizName" name="quizName" value="1">
+            <p class="choice-text" data-number="1"><%= quiz.answer1 %> 
+              <input type="radio" class="quizName" name="quizName" value="1">
+            </p>
+        
           </div>
           <div class="choice-container">
             <p class="choice-prefix">B</p>
-            <p class="choice-text" data-number="2"><%= quiz.answer2 %></p>
-            <input type="radio" class="quizName" name="quizName" value="2">
+            <p class="choice-text" data-number="2"><%= quiz.answer2 %>
+              <input type="radio" class="quizName" name="quizName" value="2">
+            </p>
+            
           </div>
           <div class="choice-container">
             <p class="choice-prefix">C</p>
-            <p class="choice-text" data-number="3"><%= quiz.answer3 %></p>
-            <input type="radio" class="quizName" name="quizName" value="3">
+            <p class="choice-text" data-number="3"><%= quiz.answer3 %>
+              <input type="radio" class="quizName" name="quizName" value="3">
+            </p>
+            
           </div>
           <div class="choice-container">
             <p class="choice-prefix">D</p>
-            <p class="choice-text" data-number="4"><%= quiz.answer4 %></p>
-            <input type="radio" class="quizName" name="quizName" value="4">
+            <p class="choice-text" data-number="4"><%= quiz.answer4 %>
+              <input type="radio" class="quizName" name="quizName" value="4">
+            </p>
           </div>
-          <div class="quiz-result"><%= quiz.result %></div>
+          <!-- <div class="quiz-result"><%= quiz.result %></div> -->
         </div>
       </form>
       <% }) %>

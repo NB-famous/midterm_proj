@@ -103,11 +103,15 @@ main {
 
     div#quiz-box{
       margin-bottom: 5rem;
+
+      h2#question {
+        font-size: 3rem;
+      }
     }
 
     div.choice-container {
       display: flex;
-      font-size: 1.5rem;
+      font-size: 2rem;
       height: 100%;
       margin-bottom: 0.5rem;
       width: 100%;
