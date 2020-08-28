@@ -104,6 +104,12 @@ main {
     div#quiz-box{
       margin-bottom: 5rem;
 
+      input[type='radio'] { 
+        transform: scale(2); 
+        height: 20px;
+        margin-left: 20px;
+      }
+
       h2#question {
         font-size: 3rem;
       }

@@ -76,8 +76,6 @@ const resultsRoutes = require('./routes/results');
 }); */
 
 // THIS NEEDS TO BE ABOVE THE INDEX GET
-app.use('/attemptQuiz', attemptQuizRoutes(db));
-
 
 app.get("/", (req, res) => {
   //res.render('index', {user: req.cookies})
@@ -136,6 +134,7 @@ app.use((req, res, next) => {
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
+app.use('/attemptQuiz', attemptQuizRoutes(db));
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/showQuiz", showQuizRoutes(db));
