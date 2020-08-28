@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS quiz_attempt CASCADE;
 DROP TABLE IF EXISTS quiz_questions CASCADE;
-DROP TABLE IF EXISTS quiz_answers CASCADE;
-DROP TABLE IF EXISTS results CASCADE;
+DROP TABLE IF EXISTS quiz_result CASCADE;
 
 
 CREATE TABLE users (
@@ -32,13 +32,6 @@ CREATE TABLE quiz_questions(
     quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE
 );
 
-CREATE TABLE quiz_answers(
-    id SERIAL PRIMARY KEY NOT NULL,
-    /*Not sure which data type answer should be*/
-    result INTEGER,
-    quiz_question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE
-);
-
 CREATE TABLE results(
     id SERIAL PRIMARY KEY NOT NULL,
     score INTEGER NOT NULL DEFAULT 0,
@@ -47,8 +40,32 @@ CREATE TABLE results(
     owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
-ALTER TABLE quiz_questions owner TO labber;
-ALTER TABLE quiz_answers owner TO labber;
-ALTER TABLE quizzes owner TO labber;
-ALTER TABLE results owner TO labber;
+CREATE TABLE quiz_attempt(
+    id SERIAL PRIMARY KEY NOT NULL,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+    question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE,
+    user_response INTEGER
+);
+
+CREATE TABLE quiz_result(
+    id SERIAL PRIMARY KEY NOT NULL,
+    quiz_attempt_id INTEGER REFERENCES quiz_attempt(id) ON DELETE CASCADE,
+    date_attempted DATE,
+    score INTEGER NOT NULL DEFAULT 0
+);
+
+-- CREATE TABLE quiz_answers(
+--     id SERIAL PRIMARY KEY NOT NULL,
+--     /*Not sure which data type answer should be*/
+--     result INTEGER,
+--     quiz_question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE
+-- );
+
+
+
 ALTER TABLE users owner TO labber;
+ALTER TABLE quizzes owner TO labber;
+ALTER TABLE quiz_attempt owner TO labber;
+ALTER TABLE quiz_questions owner TO labber;
+ALTER TABLE quiz_result owner TO labber;
