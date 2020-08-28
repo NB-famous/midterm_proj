@@ -14,27 +14,30 @@
 
   <main id="main_container">
     <!-- open here -->
-    <% shorturl.forEach(quiz => { %>
+    <form action="/results">
+    <% questions.forEach(question => { %>
     <div id="quiz-box">
-      <h2 id="question"><%= quiz.question %></h2>
+      <h2 id="question"><%= question.question %></h2>
       <div class="choice-container">
-        <p class="choice-prefix">A</p>
-        <p class="choice-text" data-number="1"><%= quiz.answer1 %></p>
+        <input type="radio" value= <%= question.answer1 %> class="choice-prefix">A</p>
+        <label for='question.answer1' class="choice-text" data-number="1"><%= question.answer1 %></p>
       </div>
       <div class="choice-container">
-        <p class="choice-prefix">B</p>
-        <p class="choice-text" data-number="2"><%= quiz.answer2 %></p>
+        <input type="radio" value= <%= question.answer2 %> class="choice-prefix">B</p>
+        <label for='question.answer2' class="choice-text" data-number="2"><%= question.answer2 %></p>
       </div>
       <div class="choice-container">
-        <p class="choice-prefix">C</p>
-        <p class="choice-text" data-number="3"><%= quiz.answer3 %></p>
+        <input type="radio" value= <%= question.answer3 %> class="choice-prefix">C</p>
+        <label for='question.answer3' class="choice-text" data-number="3"><%= question.answer3 %></p>
       </div>
       <div class="choice-container">
-        <p class="choice-prefix">D</p>
-        <p class="choice-text" data-number="4"><%= quiz.answer4 %></p>
+        <input type="radio" value= <%= question.answer4%> class="choice-prefix">D</p>
+        <label for='question.answer4' class="choice-text" data-number="4"><%= question.answer4 %></p>
       </div>
     </div>
     <% }) %>
+    <input type="submit" value="Submit">
+  </form>
     <!-- close here -->
   </main>
 

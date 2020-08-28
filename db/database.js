@@ -18,4 +18,21 @@ const numberofQuizAttempts = function (db,id) {
   .then(res => res.rows)
 }
 
-  module.exports = {getUserById, getPublicQuizzes, numberofQuizAttempts};
+const getQuizByShortUrl = function(db, shorturl) {
+  return db.query(`SELECT id
+  FROM quizzes
+  WHERE short_url = $1`, [shorturl])
+  .then(res => res.rows)
+}
+
+const getQuizQuestions = function(db, quizID) {
+  return db.query(`SELECT question, answer1, answer2, answer3, answer4
+  FROM quiz_questions
+  WHERE quiz_id = $1`, [quizID])
+  .then(res => res.rows)
+}
+
+
+
+
+  module.exports = {getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl, getQuizQuestions};

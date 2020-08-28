@@ -20,7 +20,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts } = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl, getQuizQuestions} = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -107,11 +107,23 @@ app.get("/", (req, res) => {
 
 app.get("/attemptQuiz/:shorturl", (req,res) => {
   console.log("SOMETHING", req.body);
-  const quizID = req.params.shorturl
-  getQuizID(db, quizID)
-  .then(quiz => {
+  const shorturl = req.params.shorturl
+  getQuizByShortUrl(db, shorturl)
+  .then(databaseres => {
+    //console.log("ffff",res);
+    const quizID = databaseres[0].id;
+    getQuizQuestions(db, quizID)
+    .then( questions => {
+      console.log(questions);
+      res.render('attemptQuiz', {
+        user: {},
+        quizID: quizID,
+        questions: questions
+      })
+    })
+    //res.send(quizID)
     console.log("WHAT is get quiz id", db, quizID)
-  }).catch(e => console.log("what is error", e))
+  }).catch(e => console.log("what is error", e, res))
 })
 
 // LOGIN //
