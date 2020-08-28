@@ -32,25 +32,20 @@ module.exports = (db) => {
     getUserById(db, userId).then(user => {
       getMyQuizzes(db)
         .then(quizzes => {
-          console.log("QUIZZESSS", quizzes);
           numberofQuizAttempts(db, quizzes.id)
             .then(number => {
-              console.log("NUMBER OF ATTEMPTS", number);
-              console.log('WE ARE RIGHT HEREEEEE WHAT ARE YOU:', req.user);
               // if someone is logged in it will show the user's quizzes
-              if (req.user.id) {
-                let myQuizzes = quizzes.filter(quiz => quiz.owner_id === req.user.id);
-                console.log("PRIVATE QUIZZZZZ:", myQuizzes);
+              if (req.cookies.userID) {
+                let myQuizzes = quizzes.filter(quiz => quiz.owner_id == req.cookies.userID);
                 res.render('myQuiz', {
-                  user: req.user,
+                  user: user ? user : '',
                   quizzes: myQuizzes,
                   number: number[0].numberofattempts
                 });
               } else {
                 let publicQuizzes = quizzes.filter(quiz => quiz.is_private === false);
-                console.log("**PUBLIC QUIZZZZZ:", publicQuizzes);
                 res.render('myQuiz', {
-                  user: req.user,
+                  user: user ? user : '',
                   quizzes: publicQuizzes,
                   number: number[0].numberofattempts
                 });
