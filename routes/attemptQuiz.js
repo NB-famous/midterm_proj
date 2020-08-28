@@ -33,6 +33,7 @@ module.exports = (db) => {
 
     const userId = loginUserId(req);
     getUserById(db, userId).then(user => {
+      console.log('this is user', user)
       getPublicQuizzes(db)
         .then(quizzes => {
           let urlParam = req.originalUrl.slice(0, -1).split('/');
@@ -41,7 +42,7 @@ module.exports = (db) => {
             .then(shorturl => {
               //console.log('This is short', shorturl)
                 res.render('attemptQuiz', {
-                  user: user,
+                  user: user ? user : '',
                   shorturl:shorturl
                 });
               

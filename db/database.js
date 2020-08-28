@@ -18,4 +18,14 @@ const numberofQuizAttempts = function (db,id) {
   .then(res => res.rows)
 }
 
-  module.exports = {getUserById, getPublicQuizzes, numberofQuizAttempts};
+const getQuizByShortUrl = function (data, shortUrl) {
+  console.log('short url: ', shortUrl)
+  let str = `SELECT short_url, (quiz_questions.*) FROM quizzes JOIN quiz_questions ON quizzes.id = quiz_id WHERE quizzes.short_url LIKE '%${shortUrl}%' GROUP BY quiz_questions.id, quizzes.short_url;`;
+  console.log('str', str);
+  return data
+    .query(str)
+    .then(res => res.rows);
+};
+
+
+  module.exports = {getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl};
