@@ -15,10 +15,9 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Title</th>
+            <th scope="col">Quiz Id</th>
             <th scope="col">Quiz Url</th>
             <th scope="col">Quiz Status</th>
-            <th scope="col">Number Of Users Attempted</th>
             <th scope="col">TRY THE QUIZ</th>
           </tr>
         <tbody style="margin: 1em;">
@@ -29,7 +28,6 @@
             <% if(quiz.is_private === true){ %> <td> Private</td>
             <% } else { %> <td> Public </td>
             <% } %>
-            <td><%= number %> </td>
             <td>
               <form method="GET" action="/attemptQuiz/<%= quiz.short_url %>">
                 <button class="btn btn-primary btn-lg" type="submit">Attempt Quiz</button>

@@ -33,9 +33,9 @@ header {
     align-self: center;
     color: white;
     font-family: 'Bebas Neue', cursive;
-    font-size: 60px;
+    font-size: 100px;
     height: auto;
-    margin-top: 70px;
+    margin-top: 50px;
     width: auto;
   }
 
@@ -73,6 +73,8 @@ header {
 }
 
 main#main_box{
+  display: flex;
+  justify-content: center;
   margin-left: 200px;
 }
 
@@ -96,10 +98,18 @@ main {
     font-size: 25px;
   }
 
+  button#create-submit{
+    background-color: black;
+    width: 800px;
+    font-size: 30px;
+    margin-left: 500px;
+    margin-bottom: 30px;
+  }
+
   div.question-container{
     left: 10rem;
     margin-top: 100px;
-    position: absolute;
+    /* position: absolute; */
 
     div#quiz-box{
       margin-bottom: 5rem;
@@ -149,6 +159,7 @@ footer {
   background-color:#6d6a75;
   bottom: 0rem;
   display: flex;
+  justify-content: space-between;
   font-family: 'Bebas Neue', cursive;
   font-size: 1rem;
   padding: 1rem;

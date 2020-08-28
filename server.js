@@ -77,6 +77,17 @@ const resultsRoutes = require('./routes/results');
 
 // THIS NEEDS TO BE ABOVE THE INDEX GET
 
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+
+app.use('/attemptQuiz', attemptQuizRoutes(db));
+app.use("/api/users", usersRoutes(db));
+app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/showQuiz", showQuizRoutes(db));
+app.use("/api/quizListApi", showQuizRoutes(db));
+app.use('/myQuiz', myQuizRoutes(db));
+app.use('/results', resultsRoutes(db));
+
 app.get("/", (req, res) => {
   //res.render('index', {user: req.cookies})
   const userId = loginUserId(req);
@@ -132,17 +143,7 @@ app.use((req, res, next) => {
   });
 })
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use('/attemptQuiz', attemptQuizRoutes(db));
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/showQuiz", showQuizRoutes(db));
-app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db));
-app.use('/myQuiz', myQuizRoutes(db));
-app.use('/results', resultsRoutes(db));
-
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
 // Note: mount other resources here, using the same pattern above
