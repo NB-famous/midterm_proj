@@ -106,7 +106,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/attemptQuiz/:shorturl", (req,res) => {
-  console.log("SOMETHING", req.body);
+  //console.log("SOMETHING", req.body);
   const shorturl = req.params.shorturl
   getQuizByShortUrl(db, shorturl)
   .then(databaseres => {
