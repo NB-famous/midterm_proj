@@ -20,7 +20,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 // Id from users db
-const { getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl} = require('./db/database');
+const { getUserById, getPublicQuizzes, numberofQuizAttempts, getQuizByShortUrl } = require('./db/database');
 const { loginUserId } = require('./get_cookie');
 
 db.connect();
@@ -63,6 +63,8 @@ const myQuizRoutes = require('./routes/myQuizzes');
 const showQuizRoutes = require('./routes/showQuiz');
 const quizListRoutes = require('./routes/quizListApi');
 const attemptQuizRoutes = require('./routes/attemptQuiz');
+const resultsRoutes = require('./routes/results');
+
 
 
 
@@ -74,7 +76,7 @@ const attemptQuizRoutes = require('./routes/attemptQuiz');
 }); */
 
 // THIS NEEDS TO BE ABOVE THE INDEX GET
-app.use('/attemptQuiz/:shorturl', attemptQuizRoutes(db));
+app.use('/attemptQuiz', attemptQuizRoutes(db));
 
 
 app.get("/", (req, res) => {
@@ -86,32 +88,32 @@ app.get("/", (req, res) => {
         let urlParam = req.originalUrl.slice(0, -1).split('/');
         console.log("QUIZZESSS", quizzes);
         getQuizByShortUrl(db, urlParam[2])
-        .then(shorturl => {
-          console.log(`shour :${shorturl}`)
-          numberofQuizAttempts(db, quizzes.id)
-          .then(number => {
-            console.log("NUMBER OF ATTEMPTS", number);
-            if (!user) {
-              console.log(`not logged quizzes: ${JSON.stringify(quizzes)}`)
-              res.render('index', {
-                user: {},
-                quizzes: quizzes,
-                shorturl:shorturl,
-                number: number[0].numberofattempts
+          .then(shorturl => {
+            console.log(`shour :${shorturl}`)
+            numberofQuizAttempts(db, quizzes.id)
+              .then(number => {
+                console.log("NUMBER OF ATTEMPTS", number);
+                if (!user) {
+                  console.log(`not logged quizzes: ${JSON.stringify(quizzes)}`)
+                  res.render('index', {
+                    user: {},
+                    quizzes: quizzes,
+                    shorturl: shorturl,
+                    number: number[0].numberofattempts
+                  });
+                } else {
+                  console.log(`logged quizzes: ${JSON.stringify(quizzes)}`)
+                  res.render('index', {
+                    user: user,
+                    quizzes: quizzes,
+                    shorturl: shorturl,
+                    number: number[0].numberofattempts
+                  });
+                }
               });
-            } else {
-              console.log(`logged quizzes: ${JSON.stringify(quizzes)}`)
-              res.render('index', {
-                user: user,
-                quizzes: quizzes,
-                shorturl:shorturl,
-                number: number[0].numberofattempts
-              });
-            }
+
           });
 
-        });
-        
       });
   });
 });
@@ -120,17 +122,17 @@ app.get("/", (req, res) => {
 // LOGIN //
 app.use('/login', loginRoutes(db));
 app.use('/register', registerRoutes(db));
-app.use((req, res, next) => {
-  const userId = loginUserId(req);
-  getUserById(db, userId).then(user => {
-    if (!user) {
-      res.redirect('/');
-    } else {
-      req.user = user;
-      next()
-    }
-  });
-})
+// app.use((req, res, next) => {
+//   const userId = loginUserId(req);
+//   getUserById(db, userId).then(user => {
+//     if (!user) {
+//       res.redirect('/');
+//     } else {
+//       req.user = user;
+//       next()
+//     }
+//   });
+// })
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -140,6 +142,7 @@ app.use("/api/showQuiz", showQuizRoutes(db));
 app.use("/api/quizListApi", showQuizRoutes(db));
 app.use('/createQuiz', createQuizRoutes(db));
 app.use('/myQuiz', myQuizRoutes(db));
+app.use('/results', resultsRoutes(db));
 
 app.use('/logout', logoutRoutes()); // no need for data base since we are deleting just the cookies not db itself
 
