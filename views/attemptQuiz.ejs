@@ -16,40 +16,42 @@
 
     <div class="question-container">
       <!-- open here -->
-      <% shorturl.forEach(quiz => { %>
-      <div id="quiz-box">
-        <h2 id="question"><%= quiz.question %></h2>
-        <div class="choice-container">
-          <p class="choice-prefix">A</p>
-          <p class="choice-text" data-number="1"><%= quiz.answer1 %></p>
-          <input type="radio" class="quizName" name="quizName" value="1">
+      <% quizzes.forEach((quiz, index) => { %>
+      <!-- <%= JSON.stringify(quiz) %> -->
+      <form class="question" data-ownerId='<%= quiz.owner_id%>' data-quizId="<%= quiz.quiz_id%>"
+        data-correctAnswer="<%= quiz.result %>" data-number="<%= index %>">
+        <div id="quiz-box">
+          <h2 id="question"><%= quiz.question %></h2>
+          <div class="choice-container">
+            <p class="choice-prefix">A</p>
+            <p class="choice-text" data-number="1"><%= quiz.answer1 %></p>
+            <input type="radio" class="quizName" name="quizName" value="1">
+          </div>
+          <div class="choice-container">
+            <p class="choice-prefix">B</p>
+            <p class="choice-text" data-number="2"><%= quiz.answer2 %></p>
+            <input type="radio" class="quizName" name="quizName" value="2">
+          </div>
+          <div class="choice-container">
+            <p class="choice-prefix">C</p>
+            <p class="choice-text" data-number="3"><%= quiz.answer3 %></p>
+            <input type="radio" class="quizName" name="quizName" value="3">
+          </div>
+          <div class="choice-container">
+            <p class="choice-prefix">D</p>
+            <p class="choice-text" data-number="4"><%= quiz.answer4 %></p>
+            <input type="radio" class="quizName" name="quizName" value="4">
+          </div>
+          <div class="quiz-result"><%= quiz.result %></div>
         </div>
-        <div class="choice-container">
-          <p class="choice-prefix">B</p>
-          <p class="choice-text" data-number="2"><%= quiz.answer2 %></p>
-          <input type="radio" class="quizName" name="quizName" value="2">
-        </div>
-        <div class="choice-container">
-          <p class="choice-prefix">C</p>
-          <p class="choice-text" data-number="3"><%= quiz.answer3 %></p>
-          <input type="radio" class="quizName" name="quizName" value="3">
-        </div>
-        <div class="choice-container">
-          <p class="choice-prefix">D</p>
-          <p class="choice-text" data-number="4" ><%= quiz.answer4 %></p>
-          <input type="radio" class="quizName" name="quizName" value="4">
-        </div>
-        <div class="quiz-result"><%= quiz.result %></div>
-      </div>
-    <% }) %>
-
-  </div>
+      </form>
+      <% }) %>
+      <form id="submission" action="/attemptQuiz/<%= shorturl %>">
+        <button class="btn btn-lg btn-primary">Submit</button>
+      </form>
+    </div>
     <!-- close here -->
   </main>
-
-
 </body>
-
-
 
 </html>

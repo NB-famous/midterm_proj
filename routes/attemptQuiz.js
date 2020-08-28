@@ -28,30 +28,39 @@ const getQuizByShortUrl = function (data, shortUrl) {
 };
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
-
-
+  router.get('/:id', (req, res) => {
     const userId = loginUserId(req);
     getUserById(db, userId).then(user => {
       console.log('this is user', user)
       getPublicQuizzes(db)
         .then(quizzes => {
-          let urlParam = req.originalUrl.slice(0, -1).split('/');
+          // let urlParam = req.originalUrl.slice(0, -1).split('/');
           //console.log("QUIZZESSS", quizzes);
-          getQuizByShortUrl(db, urlParam[2])
-            .then(shorturl => {
+          getQuizByShortUrl(db, req.params.id)
+            .then(quizzes => {
               //console.log('This is short', shorturl)
-                res.render('attemptQuiz', {
-                  user: user ? user : '',
-                  shorturl:shorturl
-                });
-              
+              res.render('attemptQuiz', {
+                user: user ? user : '',
+                quizzes,
+                shorturl: req.params.id
+              });
+
             })
         })
     });
-
-
   });
+
+  router.post('/:id', (req, res) => {
+    console.log(req.body);
+    // INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
+    db.query(
+      "INSERT INTO results (score, date_attempted, quiz_id, owner_id) VALUES ($1, CURRENT_TIMESTAMP, $2, $3) RETURNING *;",
+      [req.body.score, req.body.quizId, req.body.ownerId])
+      .then(result => {
+        console.log(result.rows);
+        res.json({ resultId: result.rows[0].id });
+      })
+  })
 
   return router;
 };

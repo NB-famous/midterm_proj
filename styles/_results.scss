@@ -1,0 +1,19 @@
+.result {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+
+}
+
+.result > h1:first-child {
+    border-bottom: 1px solid black;
+}
+
+
+.result > h1 {
+    margin: 0;
+    color: black !important;
+    font-size: 6.5rem;
+    font-weight: 900;
+}
