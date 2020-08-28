@@ -120,19 +120,19 @@ app.get("/", (req, res) => {
 
 
 // LOGIN //
-app.use('/login', loginRoutes(db));
 app.use('/register', registerRoutes(db));
-// app.use((req, res, next) => {
-//   const userId = loginUserId(req);
-//   getUserById(db, userId).then(user => {
-//     if (!user) {
-//       res.redirect('/');
-//     } else {
-//       req.user = user;
-//       next()
-//     }
-//   });
-// })
+app.use('/login', loginRoutes(db));
+app.use((req, res, next) => {
+  const userId = loginUserId(req);
+  getUserById(db, userId).then(user => {
+    if (!user) {
+      res.redirect('/');
+    } else {
+      req.user = user;
+      next()
+    }
+  });
+})
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
